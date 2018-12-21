@@ -132,33 +132,6 @@ const methods = {
     })
     map.addOverlay(popupOverlay)
   },
-  zoomToArea (area, {duration}) {
-    /*
-    var featureRequest = new ol.format.WFS().writeGetFeature({
-      srsName: 'EPSG:900913',
-      featureNS: 'myvic',
-      featurePrefix: 'myvic',
-      featureTypes: ['suburb'],
-      outputFormat: 'application/json'// ,
-      // filter: ol.format.filter.equalTo('ssc_name', area, false)
-    })
-    fetch('https://myvic-app-dev-gis.beta.vic.gov.au/geoserver/myvic/wfs', {
-      method: 'POST',
-      body: new XMLSerializer().serializeToString(featureRequest)
-    }).then((response) => {
-      return response.json()
-    }).then((json) => {
-      var features = new ol.format.GeoJSON().readFeatures(json)
-      if (features.length > 0) {
-        let feature = features[0]
-        map.getView().fit(feature.getGeometry().getExtent(), {
-          size: map.getSize(),
-          duration: duration
-        })
-      }
-    })
-    */
-  },
   onMapClick (evt) {
     let feature =
         map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
@@ -194,14 +167,9 @@ const methods = {
   },
   featureMapper (feature) {
     // map the feature to a { title, content } object
-    const WIFI_STATUS = {
-      UP: '#VicFreeWifi Access Point',
-      FUTURE: 'Future Access Point'
-    }
-    // prefer long_name to name
     return {
-      title: WIFI_STATUS[feature.get('status')],
-      content: (feature.get('long_name') || feature.get('name')) + (feature.get('type') ? ` (${feature.get('type')})` : '')
+      title: feature.get('title'),
+      content: feature.get('content')
     }
   }
 }

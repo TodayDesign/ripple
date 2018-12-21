@@ -50,7 +50,6 @@ export default {
   // @import '~assets/styles/includes';
 
   .standard-button {
-    // @include button($background: palette(blue,tint5), $background-hover: palette(blue,tint10));
     border-radius: 5px;
     font-size: rem-calc(13);
     display: block;
